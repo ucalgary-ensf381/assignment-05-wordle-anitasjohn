@@ -2,13 +2,44 @@
 // it's just here to shows it works
 document.addEventListener("DOMContentLoaded", ()=>{
     createSquares();
+    getNewWord();
 
     let guessedWords= [[]];
     let availableSpace = 1;
-    let word ="dairy"
+    let word;
+    let guessWordCount =0;
 
     const keys = document.querySelectorAll(".keyboard-row button");
-   
+
+    async function getNewWord(){
+        fetch(`https://api.masoudkf.com/v1/wordle`,{
+            
+            headers: {
+                "x-api-key": "sw0Tr2othT1AyTQtNDUE06LqMckbTiKWaVYhuirv",
+             },
+        }
+
+
+
+
+        )
+        .then((response)=>{
+            return response.json();
+        })
+        .then((res)=>{
+            word = res.word;
+        })
+        .catch((err)=>{
+            console.error(err);
+        });
+    }
+
+
+
+
+
+
+
     function getCurrentWordArr(){
       const numberOfGuessedWords = guessedWords.length
       return guessedWords[numberOfGuessedWords-1]
@@ -25,12 +56,49 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     }
 
+    function getTileColor(letter, index){
+        const isCorrectLetter = word.includes(letter);
+
+        if(!isCorrectLetter){
+            return "rgb(58, 58, 60";
+        }
+        const letterInThatPosition =  word.charAt(index)
+        const isCorrectPosition = (letter === letterInThatPosition);
+        if(isCorrectPosition){
+            return"rgb(83, 141, 78)";
+        }
+        return "rgb(181, 159, 59)";
+        
+    }
+
     function handleSubmitWord(){
         const currentWordArr = getCurrentWordArr()
         if(currentWordArr.length !==5){
             window.alert("Word must be 5 letters")
         }
         const currentWord = currentWordArr.join("");
+        fetch(`https://api.masoudkf.com/v1/wordle/${currentWord}`,{
+           
+            headers: {
+                "x-api-key": "sw0Tr2othT1AyTQtNDUE06LqMckbTiKWaVYhuirv",
+             },
+        }
+        ).then((res)=>{
+            if(!res.ok){
+                throw Error()
+            }
+            const firstLetterId = guessWordCount *5 +1;
+            const interval = 200;
+            currentWordArr.forEach((letter, index)=>{
+            setTimeout(()=>{
+                const tileColor = getTileColor(letter, index);
+                const letterId = firstLetterId + index;
+                const letterEl = document.getElementById(letterId)
+                letterEl.style = `background-color: ${tileColor}; border-color: ${tileColor}`;
+            }, interval*index);
+        });
+        guessWordCount += 1;
+
         if(currentWord === word){
             window.alert("Congratulations!");
         }
@@ -38,6 +106,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
             window.alert('Sorry, you have no more guesses! The word is '+ word+'.')
         }
         guessedWords.push([])
+
+
+        }).catch(()=>{
+            window.alert("Word is not recognised!");
+        })
+
+
+        
     }
     function createSquares(){
         const gameBoard = document.getElementById("board")
