@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
     function updateGuessedWords(letter){
         const currentWordArr = getCurrentWordArr()
-        if(currentWordArr && currentWordArr.length <5){
+        if(currentWordArr && currentWordArr.length <4){
             currentWordArr.push(letter);
             const availableSpaceEl =  document.getElementById(String(availableSpace))
                 availableSpace = availableSpace +1
@@ -73,8 +73,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     function handleSubmitWord(){
         const currentWordArr = getCurrentWordArr()
-        if(currentWordArr.length !==5){
-            window.alert("Word must be 5 letters")
+        if(currentWordArr.length !==4){
+            window.alert("Word must be 4 letters")
         }
         const currentWord = currentWordArr.join("");
         fetch(`https://api.masoudkf.com/v1/wordle/${currentWord}`,{
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             if(!res.ok){
                 throw Error()
             }
-            const firstLetterId = guessWordCount *5 +1;
+            const firstLetterId = guessWordCount *4 +1;
             const interval = 200;
             currentWordArr.forEach((letter, index)=>{
             setTimeout(()=>{
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         if(currentWord === word){
             window.alert("Congratulations!");
         }
-        if(guessedWords.length === 6){
+        if(guessedWords.length === 4){
             window.alert('Sorry, you have no more guesses! The word is '+ word+'.')
         }
         guessedWords.push([])
@@ -111,13 +111,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }).catch(()=>{
             window.alert("Word is not recognised!");
         })
+        
+    }
 
 
         
-    }
+    
     function createSquares(){
         const gameBoard = document.getElementById("board")
-        for(let index =0; index < 30; index++){
+        for(let index =0; index < 16; index++){
             let square = document.createElement("div")
             square.classList.add("square")
             square.setAttribute("id", index +1);
