@@ -1,141 +1,91 @@
-// remove this line
-// it's just here to shows it works
-document.addEventListener("DOMContentLoaded", ()=>{
-    createSquares();
-    getNewWord();
+var height = 4;
+var width = 4;
 
-    let guessedWords= [[]];
-    let availableSpace = 1;
-    let word;
-    let guessWordCount =0;
+var row = 0;
+var col =0;
 
-    const keys = document.querySelectorAll(".keyboard-row button");
+var gameOver =false;
+var word = "PINK";
 
-    async function getNewWord(){
-        fetch(`https://api.masoudkf.com/v1/wordle`,{
-            
-            headers: {
-                "x-api-key": "sw0Tr2othT1AyTQtNDUE06LqMckbTiKWaVYhuirv",
-             },
-        }
+window.onload = function(){
+    initialize();
+};
 
-
-
-
-        )
-        .then((response)=>{
-            return response.json();
-        })
-        .then((res)=>{
-            word = res.word;
-        })
-        .catch((err)=>{
-            console.error(err);
-        });
-    }
-
-
-
-
-
-
-
-    function getCurrentWordArr(){
-      const numberOfGuessedWords = guessedWords.length
-      return guessedWords[numberOfGuessedWords-1]
-    }
-    function updateGuessedWords(letter){
-        const currentWordArr = getCurrentWordArr()
-        if(currentWordArr && currentWordArr.length <4){
-            currentWordArr.push(letter);
-            const availableSpaceEl =  document.getElementById(String(availableSpace))
-                availableSpace = availableSpace +1
-                availableSpaceEl.textContent = letter;
-
-        }
-
-    }
-
-    function getTileColor(letter, index){
-        const isCorrectLetter = word.includes(letter);
-
-        if(!isCorrectLetter){
-            return "rgb(58, 58, 60";
-        }
-        const letterInThatPosition =  word.charAt(index)
-        const isCorrectPosition = (letter === letterInThatPosition);
-        if(isCorrectPosition){
-            return"rgb(83, 141, 78)";
-        }
-        return "rgb(181, 159, 59)";
-        
-    }
-
-    function handleSubmitWord(){
-        const currentWordArr = getCurrentWordArr()
-        if(currentWordArr.length !==4){
-            window.alert("Word must be 4 letters")
-        }
-        const currentWord = currentWordArr.join("");
-        fetch(`https://api.masoudkf.com/v1/wordle/${currentWord}`,{
+function initialize(){
+    for(let r = 0; r <height; r++){
+        for(let c = 0; c < width; c++){
+            let tile = document.createElement("span");
+            tile.id = r.toString() + "-" + c.toString();
+            tile.classList.add("tile");
            
-            headers: {
-                "x-api-key": "sw0Tr2othT1AyTQtNDUE06LqMckbTiKWaVYhuirv",
-             },
+            document.getElementById("board").appendChild(tile);
         }
-        ).then((res)=>{
-            if(!res.ok){
-                throw Error()
-            }
-            const firstLetterId = guessWordCount *4 +1;
-            const interval = 200;
-            currentWordArr.forEach((letter, index)=>{
-            setTimeout(()=>{
-                const tileColor = getTileColor(letter, index);
-                const letterId = firstLetterId + index;
-                const letterEl = document.getElementById(letterId)
-                letterEl.style = `background-color: ${tileColor}; border-color: ${tileColor}`;
-            }, interval*index);
-        });
-        guessWordCount += 1;
-
-        if(currentWord === word){
-            window.alert("Congratulations!");
-        }
-        if(guessedWords.length === 4){
-            window.alert('Sorry, you have no more guesses! The word is '+ word+'.')
-        }
-        guessedWords.push([])
-
-
-        }).catch(()=>{
-            window.alert("Word is not recognised!");
-        })
-        
     }
 
+    document.addEventListener("keyup", (e) => {
+        if(gameOver) return;
+        if("KeyA"<= e.code && e.code <= "KeyZ"){
+            if(col < width){
+                let currTile = document.getElementById(row.toString() +'-'+col.toString());
+                if(currTile.innerText ==""){
+                    currTile.innerText = e.code[3];
+                    col+=1;
+                }
 
-        
+
+            }
+        }
+        if(e.code == "Backspace"){
+            if(0 < col && col <= width){
+                col -= 1;
+            }
+            let currTile = document.getElementById(row.toString() +'-'+col.toString());
+            currTile.innerText = "";
+        }
+        else if (e.code =="Enter"){
+            update();
+            row +=1;
+            col =0;
+
+
+        }
+        if(!gameOver && row == height){
+            gameOver = true;
+            document.getElementById("answer").innerText = word;
+        }
+    })
+}
+function update(){
+
+    let correct = 0;
     
-    function createSquares(){
-        const gameBoard = document.getElementById("board")
-        for(let index =0; index < 16; index++){
-            let square = document.createElement("div")
-            square.classList.add("square")
-            square.setAttribute("id", index +1);
-            gameBoard.appendChild(square);
-        }
-    }
-    for(let i = 0; i< keys.length; i++){
-        keys[i].onclick = ({target}) =>  {
-            const letter = target.getAttribute("data-key");
 
-            if(letter === 'enter'){
-                handleSubmitWord()
-                return;
-            }
-           updateGuessedWords(letter)
-        };
-        
+
+    for( let c =0; c< width; c++){
+        let currTile = document.getElementById(row.toString() +'-'+c.toString());
+        let letter = currTile.innerText;
+        if(word[c] == letter){
+            currTile.classList.add("correct");
+            correct+=1;
+
+        }
+        else if(word.includes(letter)){
+            currTile.classList.add("present");
+        }
+        else{
+            currTile.classList.add("absent");
+        }
+        if(correct == width){
+            gameOver= true;
+
+        }
+
     }
-});
+
+
+}
+function myForm(){
+    document.getElementById("myForm").request();
+}
+
+
