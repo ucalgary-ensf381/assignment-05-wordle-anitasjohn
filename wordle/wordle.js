@@ -5,18 +5,42 @@ var row = 0;
 var col =0;
 
 var gameOver =false;
-var word = "PINK";
+var words ="";
+var hints = ""; 
+let wordArray = [];
 
 var startOver;
 var darkModeToggle = document.querySelector('#darkMode');
 var body = document.querySelector('body');
 const winImage = document.getElementById('win-image');
+const hideOnWinElements = document.querySelectorAll('.hide-on-win');
 
+async function init(){
+    const res = await fetch("https://api.masoudkf.com/v1/wordle",{
+        headers:{
+            "x-api-key": "sw0Tr2othT1AyTQtNDUE06LqMckbTiKWaVYhuirv", 
+        }
+    });
+    const data = await res.json();
+    return { words: data.dictionary.map((word)=> word.word), hints: data.dictionary.map((word)=> word.hint)};
+
+}
 window.onload = function(){
     initialize();
 };
 
-function initialize(){
+async function initialize(){
+    const data = await init();
+    words = data.words;
+    hints = data.hints;
+    const randomIndex = Number.parseInt(Math.random()* words.length);
+    var rawWord = words[randomIndex];
+    word = rawWord.toUpperCase();
+    var hint = hints[randomIndex];
+    console.log(word);
+    wordArray = word.split("");
+
+
     for(let r = 0; r <height; r++){
         for(let c = 0; c < width; c++){
             let tile = document.createElement("span");
@@ -69,37 +93,31 @@ function initialize(){
 function showWinImage() {
     winImage.style.display = 'block';
   }
-function update(){
-
+  function update() {
     let correct = 0;
-    
-
-
-    for( let c =0; c< width; c++){
-        let currTile = document.getElementById(row.toString() +'-'+c.toString());
-        let letter = currTile.innerText;
-        if(word[c] == letter){
-            currTile.classList.add("correct");
-            correct+=1;
-            
-
-        }
-        else if(word.includes(letter)){
-            currTile.classList.add("present");
-        }
-        else{
-            currTile.classList.add("absent");
-        }
-        if(correct == width){
-            gameOver= true;
-            showWinImage();
-
-        }
-
+  
+    for(let c = 0; c < width; c++) {
+      let currTile = document.getElementById(row.toString() + '-' + c.toString());
+      let letter = currTile.innerText;
+      if(wordArray[c] === letter) {
+        currTile.classList.add("correct");
+        correct += 1;
+      } 
+      else if(wordArray.includes(letter)) {
+        currTile.classList.add("present");
+      } 
+      else {
+        currTile.classList.add("absent");
+      }
+      if(correct === width) {
+        gameOver = true;
+        showWinImage();
+      }
     }
-
-
-}
+  }
+  
+  
+  
 function myForm(){
     document.getElementById("myForm").request();
 }

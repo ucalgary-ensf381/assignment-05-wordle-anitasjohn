@@ -3,7 +3,22 @@ body{
   text-align: center;
 
 }
+#win-image {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: none;
+}
 
+.hide-on-win{
+  display: block;
+
+}
+.hide-on-win.hide{
+  display: none;
+}
 
 hr{
   width: 500px;
@@ -72,13 +87,5 @@ hr{
   left: -15x;
 
   
-}
-#win-image {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  display: none;
 }
 
