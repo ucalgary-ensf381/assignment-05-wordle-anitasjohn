@@ -3,6 +3,7 @@ body{
   text-align: center;
 
 }
+
 #win-image {
   position: fixed;
   top: 50%;
@@ -12,13 +13,6 @@ body{
   display: none;
 }
 
-.hide-on-win{
-  display: block;
-
-}
-.hide-on-win.hide{
-  display: none;
-}
 
 hr{
   width: 500px;
