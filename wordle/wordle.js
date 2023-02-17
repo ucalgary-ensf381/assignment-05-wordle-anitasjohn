@@ -7,6 +7,10 @@ var col =0;
 var gameOver =false;
 var word = "PINK";
 
+var startOver;
+var darkModeToggle = document.querySelector('#darkMode');
+var body = document.querySelector('body');
+
 window.onload = function(){
     initialize();
 };
@@ -54,6 +58,12 @@ function initialize(){
             document.getElementById("answer").innerText = word;
         }
     })
+
+    startOver = document.getElementById("startOver");
+    startOver.addEventListener("click",gameRestart );
+
+
+    
 }
 function update(){
 
@@ -86,6 +96,9 @@ function update(){
 }
 function myForm(){
     document.getElementById("myForm").request();
+}
+function gameRestart(){
+    location.reload();
 }
 
 
