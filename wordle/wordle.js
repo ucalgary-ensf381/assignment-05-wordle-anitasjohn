@@ -100,6 +100,11 @@ async function initialize(){
     
 }
 function showWinImage() {
+    // Add the "dark-theme" class to the body element if it already exists
+    if (body.classList.contains('dark-theme')) {
+      winImage.classList.add('dark-theme');
+    }
+    
     // Hide all elements except the start button
     const elementsToHide = document.querySelectorAll('body > *:not(#startOver)');
     elementsToHide.forEach(element => element.style.display = 'none');
