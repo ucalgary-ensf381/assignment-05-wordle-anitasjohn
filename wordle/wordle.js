@@ -10,6 +10,7 @@ var word = "PINK";
 var startOver;
 var darkModeToggle = document.querySelector('#darkMode');
 var body = document.querySelector('body');
+const winImage = document.getElementById('win-image');
 
 window.onload = function(){
     initialize();
@@ -65,6 +66,9 @@ function initialize(){
 
     
 }
+function showWinImage() {
+    winImage.style.display = 'block';
+  }
 function update(){
 
     let correct = 0;
@@ -77,6 +81,7 @@ function update(){
         if(word[c] == letter){
             currTile.classList.add("correct");
             correct+=1;
+            
 
         }
         else if(word.includes(letter)){
@@ -87,6 +92,7 @@ function update(){
         }
         if(correct == width){
             gameOver= true;
+            showWinImage();
 
         }
 
