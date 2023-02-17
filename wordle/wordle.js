@@ -86,6 +86,15 @@ async function initialize(){
 
     startOver = document.getElementById("startOver");
     startOver.addEventListener("click",gameRestart );
+   
+
+    const toggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    toggleButton.addEventListener('click', function() {
+        body.classList.toggle('light-theme');
+        body.classList.toggle('dark-theme');
+});
 
 
     
