@@ -91,9 +91,14 @@ async function initialize(){
     
 }
 function showWinImage() {
+    // Hide all elements except the start button
+    const elementsToHide = document.querySelectorAll('body > *:not(#startOver)');
+    elementsToHide.forEach(element => element.style.display = 'none');
+    
+    // Show the congrats icon
     winImage.style.display = 'block';
   }
-  function update() {
+function update() {
     let correct = 0;
   
     for(let c = 0; c < width; c++) {
