@@ -10,18 +10,28 @@
   </head>
   <body class="light-theme">
     <script src="./wordle.js"></script>
-    <h1>Wordle</h1>
+    <h1>Wordle</h1> <button id="theme-toggle">&#9681;</button>
    
     <br>
     <br>
-    <button id="theme-toggle">Toggle theme</button>
+   
     
     <div id = "board">
             
     </div>
     
     <br>
-    <h1 id="answer"></h1>
+    <div id="answer-bar-wrong">
+      <span id="answer-label-wrong">The correct answer was:</span>
+      
+      <span id="answer-wrong"></span>
+    </div>
+    <div id="answer-bar-correct">
+      <span id="answer-label-correct">You were correct! The answer was:</span>
+      <span id="answer-correct"></span>
+    </div>
+   
+    
 
     <button id="startOver">Start Over</button>
     </body>

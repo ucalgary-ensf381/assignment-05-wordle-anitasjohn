@@ -91,4 +91,52 @@ hr{
 
   
 }
+button#theme-toggle {
+  background: none;
+  border: none;
+  /*color: white;*/
+  font-size: 70px;
+  cursor: pointer;
+  margin-top: -1500px;
+  margin-bottom: -1000px;
+  margin-right: -900px;
+
+}
+#answer-bar-wrong{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background-color: red;
+  display: none;
+}
+#answer-bar-correct{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background-color: lightgrey;
+  display: none;
+}
+
+#answer-label-correct {
+  font-weight: bold;
+}
+
+
+#answer-label-wrong {
+  font-weight: bold;
+}
+#answer-wrong {
+  margin-left: 5px;
+  font-style: italic;
+}
+#answer-correct {
+  margin-left: 5px;
+  font-style: italic;
+}
+
+
 
