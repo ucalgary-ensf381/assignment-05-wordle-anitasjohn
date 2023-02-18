@@ -87,10 +87,14 @@ async function initialize() {
 
     startOver = document.getElementById("startOver");
     startOver.addEventListener("click", gameRestart);
+
+
     const hintButton = document.getElementById("hint-button");
     hintButton.addEventListener("click", function() {
-        alert(hint);
-    });
+    document.getElementById("answer-hint").innerText = hint;
+    document.getElementById("answer-bar-hint").style.display = "block";
+});
+
 
     
       
