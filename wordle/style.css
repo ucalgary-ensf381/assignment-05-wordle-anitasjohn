@@ -11,6 +11,7 @@ h1 {
   border-bottom: 2px solid grey;
   width: 100%; /* specify the width */
   display: inline-block;
+  justify-content: center;
 
 }
 
