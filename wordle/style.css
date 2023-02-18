@@ -1,8 +1,19 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
+ 
 
 }
+h1 {
+  
+  margin-right: 1300px;
+  margin: auto;
+  border-bottom: 2px solid grey;
+  width: 100%; /* specify the width */
+  display: inline-block;
+
+}
+
 .light-theme {
   background-color: #f9f9f9;
   color: #333;
@@ -40,6 +51,8 @@ hr{
   margin-top: 3px;
   display: flex;
   flex-wrap: wrap;
+  margin-left: 590px;
+
 }
 .tile{
   border: 2px solid lightgrey;
@@ -75,32 +88,48 @@ hr{
   border-color: white;
 
 }
-#startOver{
-  display: block;
-  margin:0 auto;
-  padding: 5px 15px;
-  font-size: 18px;
-  text-align: center;
-  border: 1 px solid rgb(57, 109, 187, 0.8);
-  position:relative;
-  top: 50px;
+#startOver {
+  position: relative;
+  /*display: flex;*/
+ 
+  margin-top: 270px;
+  margin-left: -1100px;
+  flex-wrap: wrap;
+  
   background-color: rgb(115, 156, 114);
   color: white;
-  margin-top: 90px;
-  left: -15x;
-
-  
+  padding: 5px 15px;
+  font-size: 18px;
+  border: 1px solid rgb(57, 109, 187, 0.8);
 }
+
 button#theme-toggle {
+  display: inline-block;
   background: none;
   border: none;
   /*color: white;*/
-  font-size: 70px;
+  font-size: 30px;
   cursor: pointer;
   margin-top: -1500px;
   margin-bottom: -1000px;
   margin-right: -900px;
+  margin: auto;
 
+
+}
+button#instructions-toggle{
+  display: inline-block;
+  background: none;
+  border: none;
+  /*color: white;*/
+  font-size: 23px;
+  cursor: pointer;
+  margin-top: 1500px;
+  margin-right: 1300px;
+  margin-bottom: -900px;
+  margin: auto;
+
+  
 }
 #answer-bar-wrong{
   position: fixed;
@@ -139,4 +168,33 @@ button#theme-toggle {
 }
 
 
+
+#game-container {
+  width: calc(100% - 400px);
+  float: left;
+}
+
+#instructions {
+  border: none;
+  background: none;
+  width: 400px;
+  float: right;
+  display: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  
+}
+
+
+
+@media (max-width: 768px) {
+  #board {
+    margin-top: 30px;
+  }
+  
+  #startOver {
+    margin-top: 50px;
+   
+  }
+}
 

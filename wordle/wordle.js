@@ -97,6 +97,26 @@ async function initialize() {
         body.classList.toggle('dark-theme');
     });
 
+    const instructionsToggle = document.getElementById('instructions-toggle');
+    const instructions = document.getElementById('instructions');
+
+    instructionsToggle.addEventListener('click', () => {
+        if (instructions.style.display === 'none') {
+            instructions.style.display = 'block';
+        } else {
+            instructions.style.display = 'none';
+        }
+        });
+    
+
+    const gameRestartButton = document.getElementById("restart");
+    gameRestartButton.addEventListener("click", function(){
+        gameRestart();
+        var reset = document.getElementById("restart");
+        reset.disabled = true;
+        reset.innerText="Loading..."
+    })
+
 
 
 }

@@ -10,29 +10,49 @@
   </head>
   <body class="light-theme">
     <script src="./wordle.js"></script>
-    <h1>Wordle</h1> <button id="theme-toggle">&#9681;</button>
-   
-    <br>
-    <br>
-   
+
+
+    <header>
+      <h1>Wordle <button id="theme-toggle">&#9681;</button><button id="instructions-toggle">&#9432;</button></h1>
+     
+    </header>
     
-    <div id = "board">
-            
+
+    <br>
+    <br>
+
+    <div id="game-container">
+      <div id="board"></div>
     </div>
-    
+    <div id="instructions">
+      <h2>How To Play</h2>
+      <ul>
+        <li>Start Typing.The letters will appear in the boxes</li>
+        <br>
+        <li>Remove the letters with Backspace</li>
+        <br>
+        <li>Hit Enter/Return to submit the answer</li>
+        <br>
+        <li>Letters with green background are in the right spot</li><br>
+        <li>Letters with the yelloe background exist in the word, but are in the wrong spot</li>
+        <br>
+        <li>Letters with the gray background do not exist in the word</li>
+        <br>
+        <li>If you need a hint, click the &#9432; icon </li>
+      </ul>
+    </div>
+
     <br>
     <div id="answer-bar-wrong">
       <span id="answer-label-wrong">The correct answer was:</span>
-      
+
       <span id="answer-wrong"></span>
     </div>
     <div id="answer-bar-correct">
       <span id="answer-label-correct">You were correct! The answer was:</span>
       <span id="answer-correct"></span>
     </div>
-   
-    
-
+    <div id="restart"></div>
     <button id="startOver">Start Over</button>
-    </body>
+  </body>
 </html>
