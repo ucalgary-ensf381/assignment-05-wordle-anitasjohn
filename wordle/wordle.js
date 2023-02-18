@@ -39,6 +39,16 @@ async function initialize() {
     var hint = hints[randomIndex];
     console.log(word);
     wordArray = word.split("");
+    const instructionsToggle = document.getElementById('instructions-toggle');
+    const instructions = document.getElementById('instructions');
+
+    instructionsToggle.addEventListener('click', () => {
+        if (instructions.style.display === 'none') {
+            instructions.style.display = 'block';
+        } else {
+            instructions.style.display = 'none';
+        }
+        });
 
 
     for (let r = 0; r < height; r++) {
@@ -50,6 +60,7 @@ async function initialize() {
             document.getElementById("board").appendChild(tile);
         }
     }
+    
 
     startOver = document.getElementById("startOver");
     startOver.addEventListener("click", gameRestart);
@@ -110,16 +121,7 @@ async function initialize() {
         body.classList.toggle('dark-theme');
     });
 
-    const instructionsToggle = document.getElementById('instructions-toggle');
-    const instructions = document.getElementById('instructions');
-
-    instructionsToggle.addEventListener('click', () => {
-        if (instructions.style.display === 'none') {
-            instructions.style.display = 'block';
-        } else {
-            instructions.style.display = 'none';
-        }
-        });
+    
     
 
     const gameRestartButton = document.getElementById("restart");
@@ -128,7 +130,7 @@ async function initialize() {
         var reset = document.getElementById("restart");
         reset.disabled = true;
         reset.innerText="Loading..."
-    })
+        })
 
     
 

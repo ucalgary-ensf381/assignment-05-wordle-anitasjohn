@@ -90,13 +90,13 @@ hr{
 
 }
 #startOver {
-  position: relative;
-  /*display: flex;*/
+  position: absolute;
+  display: flex;
  
   margin-top: 270px;
-  margin-left: -1100px;
+  margin-right: 970px;
   flex-wrap: wrap;
-  
+  right: -270px;
   background-color: rgb(115, 156, 114);
   color: white;
   padding: 5px 15px;
