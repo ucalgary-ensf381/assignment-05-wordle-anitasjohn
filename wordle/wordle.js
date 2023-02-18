@@ -94,6 +94,10 @@ async function initialize() {
             currTile.innerText = "";
         }
         else if (e.code == "Enter") {
+            if (col < 4) {
+                window.alert("You must complete the word first.");
+                return;
+              }
             update();
             row += 1;
             col = 0;
