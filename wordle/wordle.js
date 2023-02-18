@@ -51,6 +51,17 @@ async function initialize() {
         }
     }
 
+    startOver = document.getElementById("startOver");
+    startOver.addEventListener("click", gameRestart);
+
+
+    const hintButton = document.getElementById("hint-button");
+    hintButton.addEventListener("click", function() {
+    document.getElementById("answer-hint").innerText = hint;
+    document.getElementById("answer-bar-hint").style.display = "block";
+});
+
+
     document.addEventListener("keyup", (e) => {
         if (gameOver) return;
         if ("KeyA" <= e.code && e.code <= "KeyZ") {
@@ -85,16 +96,7 @@ async function initialize() {
         }
     })
 
-    startOver = document.getElementById("startOver");
-    startOver.addEventListener("click", gameRestart);
-
-
-    const hintButton = document.getElementById("hint-button");
-    hintButton.addEventListener("click", function() {
-    document.getElementById("answer-hint").innerText = hint;
-    document.getElementById("answer-bar-hint").style.display = "block";
-});
-
+    
 
     
       
