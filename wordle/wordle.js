@@ -87,6 +87,13 @@ async function initialize() {
 
     startOver = document.getElementById("startOver");
     startOver.addEventListener("click", gameRestart);
+    const hintButton = document.getElementById("hint-button");
+    hintButton.addEventListener("click", function() {
+        alert(hint);
+    });
+
+    
+      
 
 
     const toggleButton = document.getElementById('theme-toggle');
@@ -116,6 +123,8 @@ async function initialize() {
         reset.disabled = true;
         reset.innerText="Loading..."
     })
+
+    
 
 
 
