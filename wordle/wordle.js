@@ -160,35 +160,33 @@ function showWinImage() {
 }
 function update() {
     let correct = 0;
+    let usedLetters = new Array(wordArray.length).fill(false); // keep track of which letters have been marked as correct
 
     for (let c = 0; c < width; c++) {
         let currTile = document.getElementById(row.toString() + '-' + c.toString());
         let letter = currTile.innerText;
-        if (wordArray[c] === letter) {
+        let index = wordArray.indexOf(letter);
+        if (wordArray[c] === letter && !usedLetters[c]) { // mark the letter as correct only if it hasn't been used already
             currTile.classList.add("correct");
+            usedLetters[c] = true;
             correct += 1;
-            
         }
-        else if (wordArray.includes(letter)) {
+        else if (index >= 0 && !usedLetters[index]) { // mark the letter as present only if it hasn't been used already
             currTile.classList.add("present");
+            usedLetters[index] = true;
         }
         else {
             currTile.classList.add("absent");
         }
         if (correct === width) {
             gameOver = true;
-           
             showWinImage();
             document.getElementById("answer-correct").innerText = word;
             document.getElementById("answer-bar-correct").style.display = "block";
-            
-            
-            
         }
-        
-
     }
 }
+
 
 
 
